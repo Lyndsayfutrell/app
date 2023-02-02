@@ -2,7 +2,9 @@ import { lazy, Suspense, useState } from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./Components/Navbar";
+import RequireAuth from "./Contexts/RequireAuth";
 import CheckAuth from "./Contexts/CheckAuth";
+import ViewPost from "./Pages/ViewPost";
 
 const Home = lazy(() => import("./Pages/Homepage"));
 const Forum = lazy(() => import("./Pages/Forum/Forumpage"));
@@ -94,7 +96,12 @@ function App() {
 						<Route path="/forum" element={<Forum />} />
 						<Route
 							path="forum/post/:id"
-							element={<ViewAnnouncement />}
+							element={
+								// <AdminOnly>
+								// 	<ViewAnnouncement />
+								// </AdminOnly>
+								<ViewPost />
+							}
 						/>
 						<Route
 							path="forum/edit/:id"
